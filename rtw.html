@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ready to Wear — MISS RARE</title>
+  <meta name="description" content="Miss Rare ready-to-wear collection. African heritage worn every day. Based in Dar es Salaam, Tanzania." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Bebas+Neue&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root{--gold:#C9A96E;--gold-light:#E8D5A3;--black:#090909;--off-black:#111111;--charcoal:#1A1A1A;--white:#FAFAF8;--warm-grey:#242018;--font-display:'Bebas Neue',sans-serif;--font-serif:'Cormorant Garamond',serif;--font-body:'Montserrat',sans-serif;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--black);color:var(--white);font-family:var(--font-body);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+    a{text-decoration:none;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:18px 20px;transition:background .4s,padding .3s;}
+    nav.scrolled{background:rgba(9,9,9,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:12px 20px;border-bottom:1px solid rgba(201,169,110,.12);}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+    .nav-logo img{height:34px;width:34px;object-fit:contain;filter:invert(1) sepia(1) saturate(1.5) hue-rotate(5deg) brightness(.82);}
+    .nav-wordmark{font-family:var(--font-display);font-size:17px;letter-spacing:.16em;color:var(--gold);}
+    .hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;}
+    .hamburger span{display:block;width:22px;height:1px;background:var(--white);transition:transform .3s,opacity .3s;}
+    .hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+    .hamburger.open span:nth-child(2){opacity:0;}
+    .hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+    .nav-menu{position:fixed;inset:0;background:var(--black);z-index:199;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:translateX(100%);transition:transform .45s cubic-bezier(.77,0,.175,1);}
+    .nav-menu.open{transform:translateX(0);}
+    .nav-menu a{font-family:var(--font-display);font-size:clamp(38px,10vw,64px);letter-spacing:.06em;color:var(--white);text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(201,169,110,.1);width:80%;text-align:center;transition:color .2s;}
+    .nav-menu a:hover,.nav-menu a.active{color:var(--gold);}
+    .nav-menu-socials{margin-top:36px;display:flex;gap:24px;}
+    .nav-menu-socials a{font-family:var(--font-body) !important;font-size:10px !important;letter-spacing:.2em;color:var(--gold) !important;border:none !important;width:auto !important;padding:0 !important;}
+
+    /* PAGE HERO — different feel for RTW */
+    .page-hero{padding-top:100px;padding-bottom:48px;background:var(--black);position:relative;overflow:hidden;border-bottom:1px solid rgba(201,169,110,.1);}
+    .page-hero::before{content:'RTW';position:absolute;bottom:-20px;right:-10px;font-family:var(--font-display);font-size:clamp(80px,28vw,220px);color:transparent;-webkit-text-stroke:1px rgba(201,169,110,.06);pointer-events:none;}
+    .page-hero-inner{max-width:1200px;margin:0 auto;padding:0 20px;}
+    .breadcrumb{font-family:var(--font-body);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,169,110,.6);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+    .breadcrumb a{color:rgba(201,169,110,.6);text-decoration:none;transition:color .2s;}
+    .breadcrumb a:hover{color:var(--gold);}
+    .page-title{font-family:var(--font-display);font-size:clamp(48px,14vw,110px);letter-spacing:.04em;color:var(--white);line-height:.95;}
+    .page-title em{font-family:var(--font-serif);font-style:italic;color:var(--gold);font-size:.55em;display:block;margin-top:6px;}
+    .page-desc{margin-top:20px;font-family:var(--font-serif);font-size:clamp(15px,3vw,19px);font-style:italic;color:rgba(232,213,163,.75);max-width:520px;line-height:1.7;}
+    .page-ig-tag{margin-top:14px;font-family:var(--font-body);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,169,110,.55);}
+
+    /* TICKER */
+    .ticker-wrap{background:var(--gold);overflow:hidden;padding:11px 0;}
+    .ticker{display:flex;gap:44px;white-space:nowrap;animation:ticker 22s linear infinite;}
+    .ticker span{font-family:var(--font-display);font-size:11px;letter-spacing:.18em;color:var(--black);flex-shrink:0;}
+    @keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+    /* RTW FEATURED REEL */
+    .featured-section{padding:56px 0;background:var(--charcoal);}
+    .fv-inner{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1fr;gap:36px;}
+    @media(min-width:768px){.fv-inner{grid-template-columns:1fr 1fr;align-items:center;gap:56px;}}
+    .section-eyebrow{font-family:var(--font-body);font-size:9px;font-weight:500;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+    .section-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);opacity:.6;flex-shrink:0;}
+    .section-title{font-family:var(--font-serif);font-size:clamp(28px,5.5vw,52px);font-weight:300;line-height:1.05;color:var(--white);}
+    .section-title strong{font-weight:600;font-style:italic;color:var(--gold);}
+    .fv-body{margin-top:18px;font-family:var(--font-serif);font-size:17px;font-style:italic;line-height:1.75;color:rgba(250,250,248,.7);}
+    .fv-actions{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;}
+    .btn-gold{font-family:var(--font-body);font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--black);background:var(--gold);padding:13px 24px;display:inline-block;transition:background .2s,transform .2s;border:none;cursor:pointer;}
+    .btn-gold:hover{background:#E8D5A3;transform:translateY(-2px);}
+    .btn-outline{font-family:var(--font-body);font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);padding:13px 24px;display:inline-block;transition:background .2s,color .2s,transform .2s;}
+    .btn-outline:hover{background:var(--gold);color:var(--black);transform:translateY(-2px);}
+    .reel-wrap{max-width:380px;margin:0 auto;width:100%;}
+    .reel-placeholder{background:var(--warm-grey);aspect-ratio:9/16;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border:1px solid rgba(201,169,110,.15);padding:28px;}
+    .reel-placeholder-icon{font-size:44px;opacity:.35;}
+    .reel-placeholder-text{font-family:var(--font-serif);font-size:14px;font-style:italic;color:rgba(250,250,248,.45);text-align:center;line-height:1.6;}
+    .reel-placeholder-hint{font-family:var(--font-body);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);opacity:.65;text-align:center;}
+
+    /* RTW GRID — Masonry-ish */
+    .rtw-section{padding:56px 0;background:var(--off-black);}
+    .rtw-header{max-width:1200px;margin:0 auto;padding:0 20px 40px;}
+    .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px;}
+    .filter-btn{font-family:var(--font-body);font-size:9px;letter-spacing:.2em;text-transform:uppercase;padding:9px 18px;border:1px solid rgba(201,169,110,.3);color:rgba(250,250,248,.55);background:none;cursor:pointer;transition:all .2s;}
+    .filter-btn.active,.filter-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,169,110,.06);}
+    .rtw-grid{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:4px;}
+    @media(min-width:600px){.rtw-grid{grid-template-columns:repeat(3,1fr);}}
+    @media(min-width:900px){.rtw-grid{grid-template-columns:repeat(4,1fr);}}
+
+    .rtw-card{position:relative;overflow:hidden;background:var(--warm-grey);aspect-ratio:3/4;}
+    .rtw-card img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .65s cubic-bezier(.23,1,.32,1);}
+    .rtw-card:hover img{transform:scale(1.06);}
+    .rtw-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(9,9,9,.88) 0%,rgba(9,9,9,.05) 55%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:16px;opacity:0;transition:opacity .3s;}
+    .rtw-card:hover .rtw-card-overlay{opacity:1;}
+    @media(hover:none){.rtw-card-overlay{opacity:1;}}
+    .rtw-card-name{font-family:var(--font-body);font-size:7px;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,250,248,.6);margin-bottom:4px;}
+    .rtw-card-title{font-family:var(--font-serif);font-size:16px;font-style:italic;color:var(--white);margin-bottom:10px;}
+    .wa-btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-body);font-size:8px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--black);background:var(--gold);text-decoration:none;padding:9px 16px;transition:background .2s;}
+    .wa-btn:hover{background:#E8D5A3;}
+    .wa-btn svg{width:12px;height:12px;flex-shrink:0;}
+    .lb-loading{text-align:center;padding:60px 20px;font-family:var(--font-serif);font-size:18px;font-style:italic;color:rgba(250,250,248,.4);}
+
+    /* FOOTER */
+    footer{background:#060606;padding:44px 20px 24px;border-top:1px solid rgba(201,169,110,.1);}
+    .footer-top{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:36px;max-width:1200px;margin-left:auto;margin-right:auto;}
+    @media(min-width:600px){.footer-top{grid-template-columns:2fr 1fr 1fr;}}
+    .footer-brand img{height:44px;filter:invert(1) sepia(1) saturate(1.5) hue-rotate(5deg) brightness(.8);margin-bottom:10px;display:block;}
+    .footer-tagline{font-family:var(--font-serif);font-size:13px;font-style:italic;color:rgba(250,250,248,.35);line-height:1.6;}
+    .footer-col-title{font-family:var(--font-body);font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:9px;}
+    .footer-links a{font-family:var(--font-body);font-size:11px;color:rgba(250,250,248,.4);text-decoration:none;transition:color .2s;}
+    .footer-links a:hover{color:var(--gold);}
+    .footer-bottom{border-top:1px solid rgba(201,169,110,.07);padding-top:20px;display:flex;flex-direction:column;gap:6px;max-width:1200px;margin:0 auto;}
+    @media(min-width:600px){.footer-bottom{flex-direction:row;justify-content:space-between;}}
+    .footer-copy{font-family:var(--font-body);font-size:10px;color:rgba(250,250,248,.22);}
+
+    .fade-up{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.23,1,.32,1);}
+    .fade-up.visible{opacity:1;transform:none;}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="public/images/missrarelogo.jpg" alt="Miss Rare" />
+    <span class="nav-wordmark">MISS RARE</span>
+  </a>
+  <button class="hamburger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-menu" id="navMenu">
+  <a href="index.html">Home</a>
+  <a href="wedding.html">Wedding</a>
+  <a href="rtw.html" class="active">RTW</a>
+  <a href="index.html#about">About</a>
+  <a href="index.html#contact">Book Now</a>
+  <div class="nav-menu-socials">
+    <a href="https://instagram.com/missraretz" target="_blank">@missraretz</a>
+    <a href="https://instagram.com/missrarertw" target="_blank">@missrarertw</a>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> › Ready to Wear</div>
+    <h1 class="page-title">READY<em>to Wear</em></h1>
+    <p class="page-desc">African heritage, worn every day. Kaftans, kimonos, dusters and more — each piece a wearable celebration of where we come from.</p>
+    <div class="page-ig-tag">Follow @missrarertw for daily drops</div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>KAFTANS</span><span>✦</span><span>KIMONOS</span><span>✦</span><span>DUSTERS</span><span>✦</span>
+    <span>AFRICAN PRINTS</span><span>✦</span><span>KENTE</span><span>✦</span><span>HANDCRAFTED</span><span>✦</span>
+    <span>@MISSRARERTW</span><span>✦</span>
+    <span>KAFTANS</span><span>✦</span><span>KIMONOS</span><span>✦</span><span>DUSTERS</span><span>✦</span>
+    <span>AFRICAN PRINTS</span><span>✦</span><span>KENTE</span><span>✦</span><span>HANDCRAFTED</span><span>✦</span>
+    <span>@MISSRARERTW</span><span>✦</span>
+  </div>
+</div>
+
+<!-- FEATURED REEL -->
+<section class="featured-section">
+  <div class="fv-inner">
+    <div class="fade-up">
+      <div class="section-eyebrow">Latest Drop</div>
+      <h2 class="section-title">African heritage,<br><strong>worn every day</strong></h2>
+      <p class="fv-body">Watch the latest RTW piece fresh from @missrarertw. Real women, real drip — made right here in Dar es Salaam.</p>
+      <div class="fv-actions">
+        <a href="index.html#contact" class="btn-gold">Enquire Now</a>
+        <a href="https://instagram.com/missrarertw" target="_blank" class="btn-outline">@missrarertw</a>
+      </div>
+    </div>
+    <div class="reel-wrap fade-up">
+      <!--
+        PASTE YOUR @missrarertw INSTAGRAM REEL EMBED CODE HERE.
+        Same process as wedding.html — go to the Reel → ··· → Embed → Copy → Paste here.
+      -->
+       <div class="reel-wrapper fade-up">
+  <video 
+    src="public/videos/rtwvideo1.mp4" 
+    autoplay 
+    muted 
+    loop 
+    playsinline
+    controls
+    style="width: 100%; border-radius: 12px;"
+  ></video>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- RTW LOOKBOOK -->
+<section class="rtw-section">
+  <div class="rtw-header fade-up">
+    <div class="section-eyebrow">The Collection</div>
+    <h2 class="section-title">Every day is<br><strong>a runway</strong></h2>
+    <div class="filter-row">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="kaftan">Kaftan</button>
+      <button class="filter-btn" data-filter="kimono">Kimono</button>
+      <button class="filter-btn" data-filter="duster">Duster</button>
+      <button class="filter-btn" data-filter="set">Sets</button>
+    </div>
+  </div>
+  <div class="rtw-grid" id="rtwGrid">
+    <div class="lb-loading">Loading collection...</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="public/images/missrarelogo.jpg" alt="Miss Rare" />
+      <div class="footer-tagline">African fashion.<br>Unapologetically rare.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Pages</div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="wedding.html">Wedding & Events</a></li>
+        <li><a href="index.html#contact">Book Now</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Follow</div>
+      <ul class="footer-links">
+        <li><a href="https://instagram.com/missraretz" target="_blank">@missraretz</a></li>
+        <li><a href="https://instagram.com/missrarertw" target="_blank">@missrarertw</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Miss Rare. YWE Award Winner 2023.</div>
+    <div class="footer-copy">Dar es Salaam, Tanzania 🇹🇿</div>
+  </div>
+</footer>
+
+<script async src="//www.instagram.com/embed.js"></script>
+<script>
+  const burger = document.getElementById('burger');
+  const navMenu = document.getElementById('navMenu');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open'); navMenu.classList.toggle('open');
+    document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open'); navMenu.classList.remove('open'); document.body.style.overflow = '';
+  }));
+  window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50));
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:0.1});
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  let currentFilter = 'all';
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      renderRTW(currentFilter);
+    });
+  });
+
+  const waSvg = `<svg fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
+
+  function renderRTW(filter) {
+    const grid = document.getElementById('rtwGrid');
+    const filtered = filter === 'all' ? rtwData : rtwData.filter(i => i.category === filter);
+    if (!filtered.length) { grid.innerHTML = '<div class="lb-loading">No looks in this category yet.</div>'; return; }
+    grid.innerHTML = filtered.map(item => {
+      const waMsg = encodeURIComponent(`Hello Miss Rare! 👋\n\nI love the "${item.title}" from the RTW collection and would like to enquire about it ✨`);
+      return `
+        <div class="rtw-card">
+          <img src="${item.image}" alt="${item.title}" loading="lazy" />
+          <div class="rtw-card-overlay">
+            <div class="rtw-card-name">${item.category}</div>
+            <div class="rtw-card-title">${item.title}</div>
+            <a class="wa-btn" href="https://wa.me/+255 718 104 070?text=${waMsg}" target="_blank" rel="noopener">
+              ${waSvg} Enquire
+            </a>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  let rtwData = [];
+  fetch('content/rtw/index.json')
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(data => { rtwData = data; renderRTW('all'); })
+    .catch(() => {
+      rtwData = [
+        { title:'Kente Open Duster', category:'duster', image:'public/images/rtw1.png' },
+        { title:'Orange Print Kimono', category:'kimono', image:'public/images/rtw2.png' },
+        { title:'Geometric Kaftan', category:'kaftan', image:'public/images/rtw3.png' },
+        { title:'Black Kaftan Set', category:'set', image:'public/images/rtw1.png' },
+      ];
+      renderRTW('all');
+    });
+</script>
+</body>
+</html>

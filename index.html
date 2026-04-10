@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>MISS RARE — Dar es Salaam</title>
+  <meta name="description" content="Award-winning African fashion designer based in Dar es Salaam, Tanzania. Wedding, bridal, events & ready-to-wear." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Bebas+Neue&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── SHARED ──────────────────────────────────── */
+    :root {
+      --gold:#C9A96E; --gold-light:#E8D5A3; --black:#090909;
+      --off-black:#111111; --charcoal:#1A1A1A; --white:#FAFAF8;
+      --warm-grey:#242018;
+      --font-display:'Bebas Neue',sans-serif;
+      --font-serif:'Cormorant Garamond',serif;
+      --font-body:'Montserrat',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--black);color:var(--white);font-family:var(--font-body);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+    a{text-decoration:none;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:18px 20px;transition:background .4s,padding .3s;}
+    nav.scrolled{background:rgba(9,9,9,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:12px 20px;border-bottom:1px solid rgba(201,169,110,.12);}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+    .nav-logo img{height:34px;width:34px;object-fit:contain;filter:invert(1) sepia(1) saturate(1.5) hue-rotate(5deg) brightness(.82);}
+    .nav-wordmark{font-family:var(--font-display);font-size:17px;letter-spacing:.16em;color:var(--gold);}
+    .hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:none;border:none;}
+    .hamburger span{display:block;width:22px;height:1px;background:var(--white);transition:transform .3s,opacity .3s;}
+    .hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+    .hamburger.open span:nth-child(2){opacity:0;}
+    .hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+    .nav-menu{position:fixed;inset:0;background:var(--black);z-index:199;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;transform:translateX(100%);transition:transform .45s cubic-bezier(.77,0,.175,1);}
+    .nav-menu.open{transform:translateX(0);}
+    .nav-menu a{font-family:var(--font-display);font-size:clamp(38px,10vw,64px);letter-spacing:.06em;color:var(--white);text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(201,169,110,.1);width:80%;text-align:center;transition:color .2s;}
+    .nav-menu a:hover{color:var(--gold);}
+    .nav-menu-socials{margin-top:36px;display:flex;gap:24px;}
+    .nav-menu-socials a{font-family:var(--font-body);font-size:10px;letter-spacing:.2em;color:var(--gold);border:none !important;width:auto !important;font-size:10px !important;padding:0 !important;}
+
+    /* HERO */
+    .hero{position:relative;height:100svh;min-height:580px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#0a0907 0%,#161008 50%,#0a0907 100%);}
+    .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(9,9,9,.9) 0%,rgba(9,9,9,.3) 45%,rgba(9,9,9,.55) 100%);}
+
+    /* Background image panels */
+    .hero-panels{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+    .hero-panel{overflow:hidden;}
+    .hero-panel img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:grayscale(15%) contrast(1.05);transition:transform 9s cubic-bezier(.23,1,.32,1);}
+    .hero:hover .hero-panel img{transform:scale(1.05);}
+    .hero-panel::after{content:'';position:absolute;inset:0;background:rgba(9,9,9,.25);}
+    .hero-panel{position:relative;}
+
+    /* Monogram watermark */
+    .hero-monogram{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-display);font-size:clamp(120px,35vw,320px);color:transparent;-webkit-text-stroke:1px rgba(201,169,110,.07);line-height:1;user-select:none;pointer-events:none;white-space:nowrap;}
+
+    .hero-content{position:relative;z-index:2;padding:0 20px 44px;padding-bottom:calc(44px + env(safe-area-inset-bottom));}
+    .hero-eyebrow{font-family:var(--font-body);font-size:9px;font-weight:500;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:14px;}
+    .hero-eyebrow::before{content:'';display:inline-block;width:32px;height:1px;background:var(--gold);}
+    .hero-title{font-family:var(--font-display);font-size:clamp(64px,20vw,160px);line-height:.9;letter-spacing:.04em;color:var(--white);}
+    .hero-title em{font-style:italic;font-family:var(--font-serif);color:var(--gold);font-size:.65em;display:block;line-height:1.1;}
+    .hero-sub{margin-top:16px;font-family:var(--font-serif);font-size:clamp(15px,3.5vw,20px);font-style:italic;color:rgba(232,213,163,.8);}
+    .hero-actions{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;}
+    .btn-gold{font-family:var(--font-body);font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--black);background:var(--gold);padding:13px 24px;display:inline-block;transition:background .2s,transform .2s;border:none;cursor:pointer;}
+    .btn-gold:hover{background:#E8D5A3;transform:translateY(-2px);}
+    .btn-outline{font-family:var(--font-body);font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);padding:13px 24px;display:inline-block;transition:background .2s,color .2s,transform .2s;}
+    .btn-outline:hover{background:var(--gold);color:var(--black);transform:translateY(-2px);}
+
+    /* TICKER */
+    .ticker-wrap{background:var(--gold);overflow:hidden;padding:11px 0;width:100%;}
+    .ticker{display:flex;gap:44px;white-space:nowrap;animation:ticker 22s linear infinite;}
+    .ticker span{font-family:var(--font-display);font-size:11px;letter-spacing:.18em;color:var(--black);flex-shrink:0;}
+    @keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+    /* AWARD PILLS */
+    .award-row{background:var(--charcoal);padding:28px 20px;display:flex;align-items:center;justify-content:center;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    .award-row::-webkit-scrollbar{display:none;}
+    .award-pill{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;padding:0 24px;border-right:1px solid rgba(201,169,110,.2);}
+    .award-pill:last-child{border-right:none;}
+    .award-pill-icon{font-size:20px;}
+    .award-pill-val{font-family:var(--font-serif);font-size:16px;font-style:italic;color:var(--white);}
+    .award-pill-lbl{font-family:var(--font-body);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
+
+    /* FEATURED VIDEO SECTION */
+    .featured-section{padding:64px 0;background:var(--off-black);}
+    .featured-inner{display:grid;grid-template-columns:1fr;gap:32px;}
+    @media(min-width:768px){.featured-inner{grid-template-columns:1fr 1fr;gap:48px;align-items:center;}}
+    .featured-text{}
+    .featured-text .section-eyebrow{margin-bottom:16px;}
+    .section-eyebrow{font-family:var(--font-body);font-size:9px;font-weight:500;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+    .section-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);opacity:.6;flex-shrink:0;}
+    .section-title{font-family:var(--font-serif);font-size:clamp(28px,6vw,56px);font-weight:300;line-height:1.05;color:var(--white);}
+    .section-title strong{font-weight:600;font-style:italic;color:var(--gold);}
+    .featured-body{margin-top:20px;font-family:var(--font-serif);font-size:17px;line-height:1.75;color:rgba(250,250,248,.7);font-style:italic;}
+    .featured-actions{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;}
+
+    /* Instagram embed wrapper */
+    .reel-wrapper{position:relative;width:100%;max-width:400px;margin:0 auto;}
+    .reel-placeholder{background:var(--warm-grey);aspect-ratio:9/16;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;border:1px solid rgba(201,169,110,.15);padding:32px;}
+    .reel-placeholder-icon{font-size:48px;opacity:.4;}
+    .reel-placeholder-text{font-family:var(--font-serif);font-size:15px;font-style:italic;color:rgba(250,250,248,.5);text-align:center;line-height:1.6;}
+    .reel-placeholder-hint{font-family:var(--font-body);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);opacity:.7;text-align:center;}
+    /* Actual Instagram embed overrides */
+    .instagram-media{min-width:unset !important;width:100% !important;}
+
+    /* COLLECTIONS PREVIEW */
+    .collections-section{padding:64px 0;background:var(--black);}
+    .collections-grid{display:grid;grid-template-columns:1fr;gap:4px;margin-top:40px;}
+    @media(min-width:600px){.collections-grid{grid-template-columns:1fr 1fr;}}
+    .collection-card{position:relative;overflow:hidden;aspect-ratio:3/4;display:block;text-decoration:none;}
+    .collection-card img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .7s cubic-bezier(.23,1,.32,1);}
+    .collection-card:hover img{transform:scale(1.06);}
+    .collection-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(9,9,9,.88) 0%,rgba(9,9,9,.1) 55%,rgba(9,9,9,.3) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px 24px;}
+    .collection-card-label{font-family:var(--font-body);font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+    .collection-card-title{font-family:var(--font-serif);font-size:clamp(26px,5vw,40px);font-style:italic;color:var(--white);line-height:1.1;margin-bottom:16px;}
+    .collection-card-cta{font-family:var(--font-body);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px;transition:gap .2s;}
+    .collection-card:hover .collection-card-cta{gap:14px;}
+    .collection-card-cta::after{content:'→';}
+
+    /* ABOUT STRIP */
+    .about-strip{padding:64px 0;background:var(--charcoal);position:relative;overflow:hidden;}
+    .about-strip::before{content:'MISS RARE';position:absolute;bottom:-16px;right:-8px;font-family:var(--font-display);font-size:clamp(80px,22vw,180px);color:transparent;-webkit-text-stroke:1px rgba(201,169,110,.05);pointer-events:none;white-space:nowrap;}
+    .about-strip-inner{display:grid;grid-template-columns:1fr;gap:36px;}
+    @media(min-width:768px){.about-strip-inner{grid-template-columns:1fr 1fr;align-items:center;gap:64px;}}
+    .about-body{margin-top:20px;font-family:var(--font-serif);font-size:17px;line-height:1.8;color:rgba(250,250,248,.72);font-style:italic;}
+    .about-body strong{color:var(--gold);font-style:normal;}
+    .about-body p+p{margin-top:18px;}
+    .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:36px;border:1px solid rgba(201,169,110,.18);}
+    .stat{padding:24px 20px;border-right:1px solid rgba(201,169,110,.12);border-bottom:1px solid rgba(201,169,110,.12);}
+    .stat:nth-child(even){border-right:none;}
+    .stat:nth-child(n+3){border-bottom:none;}
+    .stat-number{font-family:var(--font-display);font-size:40px;color:var(--gold);line-height:1;}
+    .stat-label{font-family:var(--font-body);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,250,248,.45);margin-top:6px;}
+    .about-img-wrap{position:relative;}
+    .about-img-wrap::before{content:'';position:absolute;top:-16px;right:-16px;width:100%;height:100%;border:1px solid rgba(201,169,110,.25);z-index:0;pointer-events:none;}
+    @media(max-width:767px){.about-img-wrap::before{display:none;}}
+    .about-img-wrap img{position:relative;z-index:1;width:100%;object-fit:cover;display:block;max-height:500px;object-position:top;}
+    .award-tag{position:absolute;bottom:-20px;left:-16px;z-index:2;background:var(--gold);color:var(--black);padding:18px 22px;}
+    @media(max-width:767px){.award-tag{position:static;display:inline-block;margin-top:16px;}}
+    .award-tag-year{font-family:var(--font-display);font-size:36px;line-height:1;}
+    .award-tag-label{font-family:var(--font-serif);font-size:11px;font-style:italic;}
+
+    /* CONTACT / BOOKING */
+    .contact-section{padding:64px 0;background:var(--off-black);}
+    .contact-inner{display:grid;grid-template-columns:1fr;gap:48px;}
+    @media(min-width:768px){.contact-inner{grid-template-columns:1fr 1fr;align-items:start;gap:72px;}}
+    .contact-desc{margin-top:20px;font-family:var(--font-serif);font-size:17px;font-style:italic;line-height:1.75;color:rgba(250,250,248,.7);}
+    .contact-links{margin-top:32px;display:flex;flex-direction:column;gap:14px;}
+    .clink{display:flex;align-items:center;gap:12px;color:var(--white);text-decoration:none;transition:color .2s;}
+    .clink:hover{color:var(--gold);}
+    .clink-icon{width:34px;height:34px;border:1px solid rgba(201,169,110,.3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;transition:background .2s,border-color .2s;}
+    .clink:hover .clink-icon{background:var(--gold);border-color:var(--gold);}
+    .clink-text{font-family:var(--font-body);font-size:11px;letter-spacing:.06em;}
+    /* Form */
+    .booking-form{background:var(--charcoal);padding:32px 24px;border:1px solid rgba(201,169,110,.12);position:relative;}
+    .booking-form::before{content:'';position:absolute;top:0;left:0;width:40px;height:3px;background:var(--gold);}
+    .form-title{font-family:var(--font-serif);font-size:24px;font-style:italic;color:var(--white);margin-bottom:24px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+    @media(max-width:480px){.form-row{grid-template-columns:1fr;}}
+    .form-group{display:flex;flex-direction:column;gap:7px;}
+    .form-group.full{grid-column:span 2;}
+    @media(max-width:480px){.form-group.full{grid-column:span 1;}}
+    .form-group label{font-family:var(--font-body);font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);}
+    .form-group input,.form-group select,.form-group textarea{background:rgba(255,255,255,.04);border:1px solid rgba(201,169,110,.22);color:var(--white);font-family:var(--font-body);font-size:13px;padding:12px 14px;outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;border-radius:0;}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);}
+    .form-group select option{background:var(--charcoal);}
+    .form-group textarea{resize:vertical;min-height:90px;}
+    .form-submit{margin-top:20px;width:100%;background:var(--gold);color:var(--black);border:none;font-family:var(--font-body);font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;padding:16px;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:10px;}
+    .form-submit:hover{background:#E8D5A3;transform:translateY(-2px);}
+    .form-submit svg{width:16px;height:16px;}
+
+    /* FOOTER */
+    footer{background:#060606;padding:44px 20px 24px;border-top:1px solid rgba(201,169,110,.1);}
+    .footer-top{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:36px;}
+    @media(min-width:600px){.footer-top{grid-template-columns:2fr 1fr 1fr;}}
+    .footer-brand img{height:44px;filter:invert(1) sepia(1) saturate(1.5) hue-rotate(5deg) brightness(.8);margin-bottom:10px;display:block;}
+    .footer-tagline{font-family:var(--font-serif);font-size:13px;font-style:italic;color:rgba(250,250,248,.35);line-height:1.6;}
+    .footer-col-title{font-family:var(--font-body);font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:9px;}
+    .footer-links a{font-family:var(--font-body);font-size:11px;color:rgba(250,250,248,.4);text-decoration:none;transition:color .2s;}
+    .footer-links a:hover{color:var(--gold);}
+    .footer-bottom{border-top:1px solid rgba(201,169,110,.07);padding-top:20px;display:flex;flex-direction:column;gap:6px;}
+    @media(min-width:600px){.footer-bottom{flex-direction:row;justify-content:space-between;}}
+    .footer-copy{font-family:var(--font-body);font-size:10px;color:rgba(250,250,248,.22);}
+
+    /* ANIMATIONS */
+    .fade-up{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.23,1,.32,1);}
+    .fade-up.visible{opacity:1;transform:none;}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="public/images/missrarelogo.jpg" alt="Miss Rare" />
+    <span class="nav-wordmark">MISS RARE</span>
+  </a>
+  <button class="hamburger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-menu" id="navMenu">
+  <a href="index.html">Home</a>
+  <a href="wedding.html">Wedding</a>
+  <a href="rtw.html">RTW</a>
+  <a href="#about">About</a>
+  <a href="#contact">Book Now</a>
+  <div class="nav-menu-socials">
+    <a href="https://instagram.com/missraretz" target="_blank">@missraretz</a>
+    <a href="https://instagram.com/missrarertw" target="_blank">@missrarertw</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-monogram">MR</div>
+  <div class="hero-panels">
+    <div class="hero-panel">
+      <img src="public/images/wedding1.png" alt="Miss Rare Wedding Look" />
+    </div>
+    <div class="hero-panel">
+      <img src="public/images/hero2.png" alt="Miss Rare RTW" />
+    </div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Dar es Salaam · Tanzania · YWE 2023</div>
+    <h1 class="hero-title">MISS<em>Rare</em></h1>
+    <p class="hero-sub">Award-winning African fashion. Unapologetically dramatic.</p>
+    <div class="hero-actions">
+      <a href="wedding.html" class="btn-gold">Wedding Collection</a>
+      <a href="rtw.html" class="btn-outline">Ready to Wear</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>YWE AWARD WINNER 2023</span><span>✦</span>
+    <span>WEDDING · SENDOFF · KITCHEN PARTY · EVENTS</span><span>✦</span>
+    <span>READY TO WEAR</span><span>✦</span>
+    <span>DAR ES SALAAM, TANZANIA</span><span>✦</span>
+    <span>@MISSRARETZ · 14K FOLLOWERS</span><span>✦</span>
+    <span>YWE AWARD WINNER 2023</span><span>✦</span>
+    <span>WEDDING · SENDOFF · KITCHEN PARTY · EVENTS</span><span>✦</span>
+    <span>READY TO WEAR</span><span>✦</span>
+    <span>DAR ES SALAAM, TANZANIA</span><span>✦</span>
+    <span>@MISSRARETZ · 14K FOLLOWERS</span><span>✦</span>
+  </div>
+</div>
+
+<!-- AWARD PILLS -->
+<div class="award-row">
+  <div class="award-pill"><div class="award-pill-icon">🏆</div><div class="award-pill-val">YWE 2023</div><div class="award-pill-lbl">Award Winner</div></div>
+  <div class="award-pill"><div class="award-pill-icon">📍</div><div class="award-pill-val">Dar es Salaam</div><div class="award-pill-lbl">Tanzania</div></div>
+  <div class="award-pill"><div class="award-pill-icon">👗</div><div class="award-pill-val">Bespoke</div><div class="award-pill-lbl">Every Piece</div></div>
+  <div class="award-pill"><div class="award-pill-icon">❤️</div><div class="award-pill-val">14K+</div><div class="award-pill-lbl">Instagram</div></div>
+</div>
+
+<!-- FEATURED REEL -->
+<section class="featured-section">
+  <div class="container" style="max-width:1200px;margin:0 auto;padding:0 20px;">
+    <div class="featured-inner">
+      <div class="featured-text fade-up">
+        <div class="section-eyebrow">Featured Look</div>
+        <h2 class="section-title">The look<br>everyone is<br><strong>talking about</strong></h2>
+        <p class="featured-body">
+          Watch the latest featured creation — straight from Miss Rare's Instagram. Every detail handcrafted in Dar es Salaam, for women who refuse to be ordinary.
+        </p>
+        <div class="featured-actions">
+          <a href="https://wa.me/+255 718 104 070?text=Hello%20Miss%20Rare!%20I%20saw%20your%20featured%20look%20and%20would%20love%20to%20book%20a%20consultation%20%F0%9F%96%A4" target="_blank" class="btn-gold">
+            Book This Look
+          </a>
+          <a href="wedding.html" class="btn-outline">View Collection</a>
+        </div>
+      </div>
+
+     <div class="reel-wrapper fade-up">
+  <video 
+    src="public/videos/weddingvideo1.mp4" 
+    autoplay 
+    muted 
+    loop 
+    playsinline
+    controls
+    style="width: 100%; border-radius: 12px;"
+  ></video>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTIONS PREVIEW -->
+<section class="collections-section">
+  <div class="container" style="max-width:1200px;margin:0 auto;padding:0 20px;">
+    <div class="fade-up" style="text-align:center;">
+      <div class="section-eyebrow" style="justify-content:center;">
+        <span style="width:32px;height:1px;background:var(--gold);opacity:.6;display:inline-block;"></span>
+        Collections
+        <span style="width:32px;height:1px;background:var(--gold);opacity:.6;display:inline-block;"></span>
+      </div>
+      <h2 class="section-title">Two worlds.<br><strong>One designer.</strong></h2>
+    </div>
+    <div class="collections-grid">
+      <a href="wedding.html" class="collection-card fade-up">
+        <img src="public/images/wedding3.png" alt="Wedding Collection" />
+        <div class="collection-card-overlay">
+          <div class="collection-card-label">@missraretz</div>
+          <div class="collection-card-title">Wedding & Events</div>
+          <div class="collection-card-cta">Explore Collection</div>
+        </div>
+      </a>
+      <a href="rtw.html" class="collection-card fade-up">
+        <img src="public/images/rtw2.png" alt="Ready to Wear" />
+        <div class="collection-card-overlay">
+          <div class="collection-card-label">@missrarertw</div>
+          <div class="collection-card-title">Ready to Wear</div>
+          <div class="collection-card-cta">Explore Collection</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<section class="about-strip" id="about">
+  <div class="container" style="max-width:1200px;margin:0 auto;padding:0 20px;">
+    <div class="about-strip-inner">
+      <div class="fade-up">
+        <div class="section-eyebrow">The Designer</div>
+        <h2 class="section-title">A rare vision<br><strong>born in Tanzania</strong></h2>
+        <div class="about-body">
+          <p>Miss Rare is a Dar es Salaam fashion house that believes every African woman deserves to feel like <strong>the rarest version of herself</strong>. From hand-beaded bridal gowns to bold ready-to-wear kaftans woven from heritage fabric.</p>
+          <p>In 2023, recognized with the <strong>Young Women Entrepreneur Award</strong> — a testament to the vision and the community of women who wear Miss Rare on their most important days.</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat"><div class="stat-number">14K+</div><div class="stat-label">Instagram</div></div>
+          <div class="stat"><div class="stat-number">2023</div><div class="stat-label">YWE Award</div></div>
+          <div class="stat"><div class="stat-number">DSM</div><div class="stat-label">Based In</div></div>
+          <div class="stat"><div class="stat-number">100%</div><div class="stat-label">Bespoke</div></div>
+        </div>
+      </div>
+      <div class="about-img-wrap fade-up">
+        <img src="public/images/about.png" alt="Miss Rare Designer" />
+        <div class="award-tag">
+          <div class="award-tag-year">2023</div>
+          <div class="award-tag-label">YWE Award Winner</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / BOOKING -->
+<section class="contact-section" id="contact">
+  <div class="container" style="max-width:1200px;margin:0 auto;padding:0 20px;">
+    <div style="text-align:center;margin-bottom:48px;" class="fade-up">
+      <div class="section-eyebrow" style="justify-content:center;">
+        <span style="width:32px;height:1px;background:var(--gold);opacity:.6;display:inline-block;"></span>
+        Book a Consultation
+        <span style="width:32px;height:1px;background:var(--gold);opacity:.6;display:inline-block;"></span>
+      </div>
+      <h2 class="section-title">Let's create something<br><strong>unforgettable together</strong></h2>
+    </div>
+    <div class="contact-inner">
+      <div class="fade-up">
+        <p class="contact-desc">Every Miss Rare piece begins with a conversation. Tell us your vision — a wedding gown, a sendoff look, a kitchen party outfit — and we'll bring it to life.</p>
+        <div class="contact-links">
+          <a href="https://wa.me/+255 718 104 070" target="_blank" class="clink">
+            <div class="clink-icon">📱</div>
+            <div class="clink-text">WhatsApp Us Directly</div>
+          </a>
+          <a href="https://instagram.com/missraretz" target="_blank" class="clink">
+            <div class="clink-icon">📷</div>
+            <div class="clink-text">@missraretz — Wedding & Events</div>
+          </a>
+          <a href="https://instagram.com/missrarertw" target="_blank" class="clink">
+            <div class="clink-icon">👗</div>
+            <div class="clink-text">@missrarertw — Ready to Wear</div>
+          </a>
+          <a href="mailto:hello@missrare.co.tz" class="clink">
+            <div class="clink-icon">✉️</div>
+            <div class="clink-text">hello@missrare.co.tz</div>
+          </a>
+        </div>
+      </div>
+      <div class="booking-form fade-up">
+        <div class="form-title">Book Your Consultation</div>
+        <div class="form-row">
+          <div class="form-group"><label>Your Name</label><input type="text" id="fname" placeholder="Amina Mbeki" /></div>
+          <div class="form-group"><label>WhatsApp Number</label><input type="tel" id="fphone" placeholder="+255 718 104 070" /></div>
+        </div>
+        <div class="form-group" style="margin-bottom:14px;">
+          <label>Occasion</label>
+          <select id="foccasion">
+            <option value="">Select occasion...</option>
+            <option>Wedding</option>
+            <option>Sendoff / Kitchen Party</option>
+            <option>Event / Gala</option>
+            <option>Ready to Wear</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your Vision</label>
+          <textarea id="fmessage" placeholder="Describe your dream look, event date, colours..."></textarea>
+        </div>
+        <button class="form-submit" onclick="sendWhatsApp()">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Send via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top" style="max-width:1200px;margin:0 auto;">
+    <div class="footer-brand">
+      <img src="public/images/missrarelogo.jpg" alt="Miss Rare" />
+      <div class="footer-tagline">African fashion.<br>Unapologetically rare.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Pages</div>
+      <ul class="footer-links">
+        <li><a href="wedding.html">Wedding & Events</a></li>
+        <li><a href="rtw.html">Ready to Wear</a></li>
+        <li><a href="#contact">Book a Consultation</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Follow</div>
+      <ul class="footer-links">
+        <li><a href="https://instagram.com/missraretz" target="_blank">@missraretz</a></li>
+        <li><a href="https://instagram.com/missrarertw" target="_blank">@missrarertw</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom" style="max-width:1200px;margin:0 auto;">
+    <div class="footer-copy">© 2025 Miss Rare. YWE Award Winner 2023.</div>
+    <div class="footer-copy">Dar es Salaam, Tanzania 🇹🇿</div>
+  </div>
+</footer>
+
+<!-- Instagram embed script (needed for Reels to render) -->
+<script async src="//www.instagram.com/embed.js"></script>
+
+<script>
+  // NAV
+  const burger = document.getElementById('burger');
+  const navMenu = document.getElementById('navMenu');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    navMenu.classList.toggle('open');
+    document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  navMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      burger.classList.remove('open');
+      navMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // SCROLL FADE
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // WHATSAPP FORM
+  function sendWhatsApp() {
+    const name = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const occasion = document.getElementById('foccasion').value;
+    const message = document.getElementById('fmessage').value.trim();
+    if (!name || !phone) { alert('Please enter your name and WhatsApp number.'); return; }
+    const text = encodeURIComponent(
+      `Hello Miss Rare! 👋\n\nName: ${name}\nWhatsApp: ${phone}\nOccasion: ${occasion || 'Not specified'}\n\n${message ? 'Vision:\n' + message : ''}\n\nI'd love to book a consultation! ✨`
+    );
+    window.open(`https://wa.me/+255 718 104 070?text=${text}`, '_blank');
+  }
+</script>
+</body>
+</html>
